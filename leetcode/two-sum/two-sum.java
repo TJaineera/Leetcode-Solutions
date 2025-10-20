@@ -1,10 +1,4 @@
-/**
- * Title: two-sum
- * Slug: two-sum
- * URL: https://leetcode.com/problems/two-sum/description/
- * Language: java
- * Submitted: 2025-10-20T19:59:44.654Z
- */
+
 
 class Solution {
     public int[] twoSum(int[] nums, int target) {
