@@ -1,9 +1,9 @@
 /**
  * Title: 3sum-closest
  * Slug: 3sum-closest
- * URL: https://leetcode.com/problems/3sum-closest/
+ * URL: https://leetcode.com/problems/3sum-closest/?envType=problem-list-v2&envId=array
  * Language: java
- * Submitted: 2025-10-21T16:01:09.333Z
+ * Submitted: 2025-10-21T16:06:12.611Z
  */
 
 class Solution {
