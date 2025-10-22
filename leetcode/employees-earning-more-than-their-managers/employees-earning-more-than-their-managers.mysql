@@ -1,0 +1,14 @@
+/**
+ * Title: Write your MySQL query statement below
+ * Slug: employees-earning-more-than-their-managers
+ * URL: https://leetcode.com/problems/employees-earning-more-than-their-managers/
+ * Language: mysql
+ * Submitted: 2025-10-22T17:27:06.511Z
+ */
+
+# Write your MySQL query statement below
+SELECT e.Name AS Employee
+FROM Employee e
+JOIN Employee m
+  ON e.ManagerId = m.Id
+WHERE e.Salary > m.Salary;
