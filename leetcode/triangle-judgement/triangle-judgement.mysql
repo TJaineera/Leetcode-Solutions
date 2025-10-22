@@ -1,0 +1,17 @@
+/**
+ * Title: triangle-judgement
+ * Slug: triangle-judgement
+ * URL: https://leetcode.com/problems/triangle-judgement/
+ * Language: mysql
+ * Submitted: 2025-10-22T17:36:08.453Z
+ */
+
+SELECT
+  x,
+  y,
+  z,
+  CASE
+    WHEN x + y > z AND x + z > y AND y + z > x THEN 'Yes'
+    ELSE 'No'
+  END AS triangle
+FROM Triangle;
