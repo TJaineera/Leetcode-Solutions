@@ -1,0 +1,13 @@
+/**
+ * Title: My solution. Plz give your feedback
+ * Slug: duplicate-emails
+ * URL: https://leetcode.com/problems/duplicate-emails/
+ * Language: mysql
+ * Submitted: 2025-10-22T17:27:25.450Z
+ */
+
+# Write your MySQL query statement below
+SELECT Email
+FROM Person
+GROUP BY Email
+HAVING COUNT(Email) > 1;
