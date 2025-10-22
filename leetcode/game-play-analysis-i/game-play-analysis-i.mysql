@@ -1,0 +1,13 @@
+/**
+ * Title: game-play-analysis-i
+ * Slug: game-play-analysis-i
+ * URL: https://leetcode.com/problems/game-play-analysis-i/
+ * Language: mysql
+ * Submitted: 2025-10-22T17:29:59.321Z
+ */
+
+# Write your MySQL query statement below
+SELECT player_id,
+       MIN(event_date) AS first_login
+FROM Activity
+GROUP BY player_id;
