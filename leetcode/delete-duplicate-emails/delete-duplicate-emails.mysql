@@ -1,0 +1,12 @@
+/**
+ * Title: delete-duplicate-emails
+ * Slug: delete-duplicate-emails
+ * URL: https://leetcode.com/problems/delete-duplicate-emails/
+ * Language: mysql
+ * Submitted: 2025-10-22T17:29:15.478Z
+ */
+
+DELETE p1
+FROM Person p1
+JOIN Person p2
+ON p1.Email = p2.Email AND p1.Id > p2.Id;
