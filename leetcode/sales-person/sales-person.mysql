@@ -1,0 +1,17 @@
+/**
+ * Title: sales-person
+ * Slug: sales-person
+ * URL: https://leetcode.com/problems/sales-person/
+ * Language: mysql
+ * Submitted: 2025-10-22T17:31:13.255Z
+ */
+
+SELECT s.name
+FROM SalesPerson s
+WHERE s.sales_id NOT IN (
+    SELECT o.sales_id
+    FROM Orders o
+    JOIN Company c
+      ON o.com_id = c.com_id
+    WHERE c.name = 'RED'
+);
