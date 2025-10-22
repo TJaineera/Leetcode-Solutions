@@ -1,0 +1,14 @@
+/**
+ * Title: Write your MySQL query statement below
+ * Slug: customers-who-never-order
+ * URL: https://leetcode.com/problems/customers-who-never-order/
+ * Language: mysql
+ * Submitted: 2025-10-22T17:28:02.125Z
+ */
+
+# Write your MySQL query statement below
+SELECT c.Name AS Customers
+FROM Customers c
+LEFT JOIN Orders o
+  ON c.Id = o.CustomerId
+WHERE o.CustomerId IS NULL;
