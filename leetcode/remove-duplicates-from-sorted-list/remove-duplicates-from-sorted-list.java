@@ -3,7 +3,7 @@
  * Slug: remove-duplicates-from-sorted-list
  * URL: https://leetcode.com/problems/remove-duplicates-from-sorted-list/
  * Language: java
- * Submitted: 2025-10-24T16:53:56.801Z
+ * Submitted: 2025-10-24T16:53:58.109Z
  */
 
 class Solution {
