@@ -1,0 +1,18 @@
+/**
+ * Title: last-person-to-fit-in-the-bus
+ * Slug: last-person-to-fit-in-the-bus
+ * URL: https://leetcode.com/problems/last-person-to-fit-in-the-bus/submissions/1814186202/
+ * Language: mysql
+ * Submitted: 2025-10-28T15:42:54.286Z
+ */
+
+# Write your MySQL query statement below
+SELECT person_name
+FROM (
+    SELECT person_name,
+           SUM(weight) OVER (ORDER BY turn) AS total_weight
+    FROM Queue
+) AS q
+WHERE total_weight <= 1000
+ORDER BY total_weight DESC
+LIMIT 1;
