@@ -1,0 +1,13 @@
+/**
+ * Title: actors-and-directors-who-cooperated-at-least-three-times
+ * Slug: actors-and-directors-who-cooperated-at-least-three-times
+ * URL: https://leetcode.com/problems/actors-and-directors-who-cooperated-at-least-three-times/submissions/1814185568/
+ * Language: mysql
+ * Submitted: 2025-10-28T15:42:11.889Z
+ */
+
+# Write your MySQL query statement below
+SELECT actor_id, director_id
+FROM ActorDirector
+GROUP BY actor_id, director_id
+HAVING COUNT(*) >= 3;
