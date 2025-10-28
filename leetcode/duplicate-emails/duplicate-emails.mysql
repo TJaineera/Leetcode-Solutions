@@ -3,11 +3,11 @@
  * Slug: duplicate-emails
  * URL: https://leetcode.com/problems/duplicate-emails/
  * Language: mysql
- * Submitted: 2025-10-22T17:27:25.450Z
+ * Submitted: 2025-10-28T15:40:53.601Z
  */
 
 # Write your MySQL query statement below
-SELECT Email
+SELECT email AS Email
 FROM Person
-GROUP BY Email
-HAVING COUNT(Email) > 1;
+GROUP BY email
+HAVING COUNT(email) > 1;
