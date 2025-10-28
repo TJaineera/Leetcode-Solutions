@@ -1,0 +1,16 @@
+/**
+ * Title: Write your MySQL query statement below
+ * Slug: daily-leads-and-partners
+ * URL: https://leetcode.com/problems/daily-leads-and-partners/
+ * Language: mysql
+ * Submitted: 2025-10-28T15:23:26.124Z
+ */
+
+# Write your MySQL query statement below
+SELECT
+    date_id,
+    make_name,
+    COUNT(DISTINCT lead_id) AS unique_leads,
+    COUNT(DISTINCT partner_id) AS unique_partners
+FROM DailySales
+GROUP BY date_id, make_name;
