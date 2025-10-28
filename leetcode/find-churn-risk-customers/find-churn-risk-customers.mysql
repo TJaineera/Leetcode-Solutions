@@ -1,0 +1,83 @@
+/**
+ * Title: find-churn-risk-customers
+ * Slug: find-churn-risk-customers
+ * URL: https://leetcode.com/problems/find-churn-risk-customers/
+ * Language: mysql
+ * Submitted: 2025-10-28T15:46:28.085Z
+ */
+
+WITH ordered_events AS (
+    SELECT
+        user_id,
+        event_date,
+        event_type,
+        plan_name,
+        monthly_amount,
+        ROW_NUMBER() OVER (
+            PARTITION BY user_id
+            ORDER BY event_date DESC, event_id DESC
+        ) AS rn_last,
+        ROW_NUMBER() OVER (
+            PARTITION BY user_id
+            ORDER BY event_date ASC, event_id ASC
+        ) AS rn_first
+    FROM subscription_events
+),
+
+per_user_agg AS (
+    SELECT
+        e.user_id,
+
+        -- first and last event dates
+        MIN(e.event_date) AS first_event_date,
+        MAX(e.event_date) AS last_event_date,
+
+        -- did the user EVER downgrade?
+        MAX(CASE WHEN e.event_type = 'downgrade' THEN 1 ELSE 0 END) AS has_downgrade,
+
+        -- maximum historical monthly_amount
+        MAX(e.monthly_amount) AS max_historical_amount
+    FROM subscription_events e
+    GROUP BY e.user_id
+),
+
+last_event AS (
+    SELECT
+        user_id,
+        event_type     AS last_event_type,
+        plan_name      AS current_plan,
+        monthly_amount AS current_monthly_amount
+    FROM ordered_events
+    WHERE rn_last = 1
+),
+
+first_event AS (
+    SELECT
+        user_id,
+        event_date AS first_event_date_check
+    FROM ordered_events
+    WHERE rn_first = 1
+)
+
+SELECT
+    p.user_id,
+    l.current_plan                           AS current_plan,
+    l.current_monthly_amount                 AS current_monthly_amount,
+    p.max_historical_amount                  AS max_historical_amount,
+    DATEDIFF(p.last_event_date, p.first_event_date) AS days_as_subscriber
+FROM per_user_agg p
+JOIN last_event  l ON p.user_id = l.user_id
+JOIN first_event f ON p.user_id = f.user_id
+-- apply all 4 churn-risk conditions
+WHERE
+    -- 1. currently active
+    l.last_event_type <> 'cancel'
+    -- 2. has at least one downgrade in history
+    AND p.has_downgrade = 1
+    -- 3. current revenue < 50% of historical max
+    AND l.current_monthly_amount < 0.5 * p.max_historical_amount
+    -- 4. subscriber for at least 60 days
+    AND DATEDIFF(p.last_event_date, p.first_event_date) >= 60
+ORDER BY
+    days_as_subscriber DESC,
+    p.user_id ASC;
