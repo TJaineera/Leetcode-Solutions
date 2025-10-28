@@ -1,0 +1,42 @@
+/**
+ * Title: Write your MySQL query statement below
+ * Slug: analyze-subscription-conversion
+ * URL: https://leetcode.com/problems/analyze-subscription-conversion/submissions/1814173877/
+ * Language: mysql
+ * Submitted: 2025-10-28T15:29:34.129Z
+ */
+
+# Write your MySQL query statement below
+WITH FreeTrial AS (
+  SELECT
+    user_id,
+    ROUND(AVG(activity_duration), 2) AS avg_free_trial_duration
+  FROM UserActivity
+  WHERE activity_type = 'free_trial'
+    AND activity_type <> 'cancelled'       -- optional if you want to skip cancelled
+  GROUP BY user_id
+),
+Paid AS (
+  SELECT
+    user_id,
+    ROUND(AVG(activity_duration), 2) AS avg_paid_duration
+  FROM UserActivity
+  WHERE activity_type = 'paid'
+  GROUP BY user_id
+),
+ConvertedUsers AS (
+  SELECT FT.user_id
+  FROM FreeTrial FT
+  INNER JOIN Paid P
+    ON FT.user_id = P.user_id
+)
+SELECT
+  CU.user_id,
+  FT.avg_free_trial_duration AS trial_avg_duration,
+  P.avg_paid_duration AS paid_avg_duration
+FROM ConvertedUsers CU
+JOIN FreeTrial FT
+  ON CU.user_id = FT.user_id
+JOIN Paid P
+  ON CU.user_id = P.user_id
+ORDER BY CU.user_id;
