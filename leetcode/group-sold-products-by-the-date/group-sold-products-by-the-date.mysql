@@ -1,0 +1,18 @@
+/**
+ * Title: Write your MySQL query statement below
+ * Slug: group-sold-products-by-the-date
+ * URL: https://leetcode.com/problems/group-sold-products-by-the-date/submissions/1814172263/
+ * Language: mysql
+ * Submitted: 2025-10-28T15:27:33.941Z
+ */
+
+# Write your MySQL query statement below
+SELECT
+  sell_date,
+  COUNT(DISTINCT product) AS num_sold,
+  GROUP_CONCAT(DISTINCT product 
+               ORDER BY product ASC 
+               SEPARATOR ',') AS products
+FROM Activities
+GROUP BY sell_date
+ORDER BY sell_date;
