@@ -1,0 +1,13 @@
+/**
+ * Title: Write your MySQL query statement below
+ * Slug: rank-scores
+ * URL: https://leetcode.com/problems/rank-scores/
+ * Language: mysql
+ * Submitted: 2025-10-28T15:44:00.377Z
+ */
+
+# Write your MySQL query statement below
+SELECT 
+    score,
+    DENSE_RANK() OVER (ORDER BY score DESC) AS `rank`
+FROM Scores;
