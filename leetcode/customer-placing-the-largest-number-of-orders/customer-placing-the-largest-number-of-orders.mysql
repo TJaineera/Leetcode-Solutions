@@ -1,0 +1,14 @@
+/**
+ * Title: Write your MySQL query statement below
+ * Slug: customer-placing-the-largest-number-of-orders
+ * URL: https://leetcode.com/problems/customer-placing-the-largest-number-of-orders/submissions/1814189920/
+ * Language: mysql
+ * Submitted: 2025-10-28T15:47:10.539Z
+ */
+
+# Write your MySQL query statement below
+SELECT customer_number
+FROM orders
+GROUP BY customer_number
+ORDER BY COUNT(*) DESC
+LIMIT 1;
