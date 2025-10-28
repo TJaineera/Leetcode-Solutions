@@ -1,0 +1,19 @@
+/**
+ * Title: Write your MySQL query statement below
+ * Slug: capital-gainloss
+ * URL: https://leetcode.com/problems/capital-gainloss/submissions/1814170873/
+ * Language: mysql
+ * Submitted: 2025-10-28T15:26:02.893Z
+ */
+
+# Write your MySQL query statement below
+SELECT
+  stock_name,
+  SUM(
+    CASE
+      WHEN operation = 'Sell' THEN price
+      WHEN operation = 'Buy'  THEN -price
+    END
+  ) AS capital_gain_loss
+FROM Stocks
+GROUP BY stock_name;
