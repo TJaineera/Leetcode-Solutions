@@ -1,0 +1,19 @@
+/**
+ * Title: the result is (A U B) - (A ∩ B)
+ * Slug: employees-with-missing-information
+ * URL: https://leetcode.com/problems/employees-with-missing-information/
+ * Language: mysql
+ * Submitted: 2025-10-28T15:40:08.191Z
+ */
+
+SELECT employee_id
+FROM Employees
+WHERE employee_id NOT IN (SELECT employee_id FROM Salaries)
+
+UNION
+
+SELECT employee_id
+FROM Salaries
+WHERE employee_id NOT IN (SELECT employee_id FROM Employees)
+
+ORDER BY employee_id;
