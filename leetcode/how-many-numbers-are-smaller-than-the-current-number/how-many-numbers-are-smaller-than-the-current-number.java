@@ -1,23 +1,23 @@
 /**
  * Title: how-many-numbers-are-smaller-than-the-current-number
  * Slug: how-many-numbers-are-smaller-than-the-current-number
- * URL: https://leetcode.com/problems/how-many-numbers-are-smaller-than-the-current-number/?envType=problem-list-v2&envId=counting-sort
+ * URL: https://leetcode.com/problems/how-many-numbers-are-smaller-than-the-current-number/submissions/1826175918/?envType=problem-list-v2&envId=sorting
  * Language: java
- * Submitted: 2025-10-24T15:51:07.056Z
+ * Submitted: 2025-11-10T17:00:56.052Z
  */
 
 class Solution {
     public int[] smallerNumbersThanCurrent(int[] nums) {
-        int[] sorted = nums.clone();
-        Arrays.sort(sorted);
-        Map<Integer, Integer> indexMap = new HashMap<>();
-        for (int i = 0; i < sorted.length; i++)
-            indexMap.putIfAbsent(sorted[i], i);
+        int n = nums.length;
+        int[] result = new int[n];
 
-        int[] res = new int[nums.length];
-        for (int i = 0; i < nums.length; i++)
-            res[i] = indexMap.get(nums[i]);
-
-        return res;
+        for (int i = 0; i < n; i++) {
+            int count = 0;
+            for (int j = 0; j < n; j++) {
+                if (nums[j] < nums[i]) count++;
+            }
+            result[i] = count;
+        }
+        return result;
     }
 }
